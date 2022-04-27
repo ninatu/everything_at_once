@@ -1,0 +1,122 @@
+n_gpu: 4
+arch:
+  type: 'EverythingAtOnceModel'
+  args:
+    video_embed_dim: 4096
+    text_embed_dim: 300
+
+    davenet_v2: true
+    strategy_audio_pooling: 'none'
+    token_projection: 'gated'
+    use_positional_emb: false
+    individual_projections: true
+    fusion_params:
+      embed_dim: 4096
+      use_cls_token: false
+      depth: 2
+      num_heads: 64
+      mlp_ratio: 1
+    projection_dim: 6144
+    projection: 'gated'
+
+
+data_loader:
+  type: FeatureDataloader
+  args:
+    num_workers: 32
+    batch_size: 224
+    shuffle: true
+    drop_last: true
+    dataset_name: 'HowTo100M'
+    dataset_kwargs:
+      flag_text_audio_misaligned: true
+      csv: './data/howto/HowTo100M_1166_videopaths.txt'
+      features_path: './data/howto/features'
+      features_path_audio: './data/howto/audio_features'
+      n_video_tokens: 12
+      min_time: 8.0
+      max_words: 20
+      we_dim: 300
+      n_clips: 5
+      num_audio_STFT_frames: 768
+      caption_path: './data/howto/caption.pickle'
+      word2vec_path: './data/GoogleNews-vectors-negative300.bin'
+
+val_data_loaders:
+  - type: FeatureDataloader
+    args:
+      num_workers: 8
+      batch_size: 8
+      shuffle: false
+      dataset_name: 'MSRVTT'
+
+      dataset_kwargs:
+        data_path: './data/msrvtt/resnet/msrvtt_jsfusion_test.pkl'
+        max_words: 20
+        training: false
+        n_video_tokens: 48
+        num_audio_STFT_frames: 3072
+        word2vec_path: './data/GoogleNews-vectors-negative300.bin'
+
+  - type: FeatureDataloader
+    args:
+      num_workers: 16
+      batch_size: 16
+      shuffle: false
+      dataset_name: 'YouCook2'
+
+      dataset_kwargs:
+        data_path: './data/youcook/resnet/youcook_val.pkl'
+        max_words: 20
+        n_video_tokens: 72
+        num_audio_STFT_frames: 4608
+        word2vec_path: './data/GoogleNews-vectors-negative300.bin'
+
+optimizer:
+  type: Adam
+  args:
+    lr: 0.00005
+lr_scheduler:
+  type: ExponentialLR
+  args:
+    gamma: 0.9
+
+loss:
+  type: CombinatorialLoss
+  args:
+    tv_weight: 1
+    ta_weight: 0.1
+    va_weight: 0.1
+    t_va_weight: 0.1
+    v_ta_weight: 0.1
+    a_tv_weight: 0.1
+
+metrics:
+- t2v_metrics
+- v2t_metrics
+- t2a_metrics
+- a2t_metrics
+- v2a_metrics
+- a2v_metrics
+- t2va_metrics
+- va2t_metrics
+- v2ta_metrics
+- ta2v_metrics
+- a2tv_metrics
+- tv2a_metrics
+- t2v+a_metrics
+- v+a2t_metrics
+- v2t+a_metrics
+- t+a2v_metrics
+- a2t+v_metrics
+- t+v2a_metrics
+trainer:
+  epochs: 15
+  mixed_precision: true
+#  max_samples_per_epoch: 1000 #  for debug
+  save_dir: ./output
+  save_period: 20
+  verbosity: 2
+  monitor: 'off'
+  init_val: false
+  neptune: false

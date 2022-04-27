@@ -1,0 +1,76 @@
+n_gpu: 4
+
+data_loader:
+  type: FeatureDataloader
+  args:
+    num_workers: 16
+    batch_size: 256
+    shuffle: true
+    drop_last: true
+    dataset_name: 'YouCook2'
+
+    dataset_kwargs:
+      data_path: './data/youcook/resnet/youcook_train.pkl'
+      data_path_2D: './data/youcook/clip/youcook_train.pkl'
+      use_2D: True
+      use_3D: False
+      key_2d: 'clip'
+      max_words: 20
+      n_video_tokens: 72
+      num_audio_STFT_frames: 4608
+      word2vec_path: './data/GoogleNews-vectors-negative300.bin'
+
+val_data_loaders:
+  - type: FeatureDataloader
+    args:
+      num_workers: 16
+      batch_size: 16
+      shuffle: false
+      dataset_name: 'YouCook2'
+
+      dataset_kwargs:
+        data_path: './data/youcook/resnet/youcook_val.pkl'
+        data_path_2D: './data/youcook/clip/youcook_val.pkl'
+        use_2D: True
+        use_3D: False
+        key_2d: 'clip'
+        max_words: 20
+        n_video_tokens: 72
+        num_audio_STFT_frames: 4608
+        word2vec_path: './data/GoogleNews-vectors-negative300.bin'
+
+optimizer:
+  type: Adam
+  args:
+    lr: 0.00001
+lr_scheduler:
+  type: ExponentialLR
+  args:
+    gamma: 0.9
+
+loss:
+  type: CombinatorialLoss
+  args:
+    tv_weight: 1
+    ta_weight: 1
+    va_weight: 1
+    t_va_weight: 1
+    v_ta_weight: 1
+    a_tv_weight: 1
+
+trainer:
+  epochs: 5
+  use_eval_mode_always: true
+  resume_only_model: true
+  mixed_precision: true
+  save_latest: false
+  use_clip_text_model: true
+  use_clip_text_model_use_proj: true
+  use_clip_text_model_use_just_cls: false
+#  max_samples_per_epoch: 1000 #  for debug
+  save_dir: ./output
+  save_period: 100
+  verbosity: 2
+  monitor: 'off'
+  init_val: false
+  neptune: false

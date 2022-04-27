@@ -1,0 +1,38 @@
+n_gpu: 4
+arch:
+  type: 'EverythingAtOnceModel'
+  args:
+    video_embed_dim: 4096
+    text_embed_dim: 300
+    audio_max_num_STFT_frames: 768
+
+    davenet_v2: true
+    strategy_audio_pooling: 'max_pool'
+    token_projection: 'gated'
+    use_positional_emb: false
+    individual_projections: true
+    fusion_params:
+      embed_dim: 4096
+      use_cls_token: false
+      depth: 1
+      num_heads: 64
+      mlp_ratio: 1
+    projection_dim: 6144
+    projection: 'gated'
+
+
+data_loader:
+  type: FeatureDataloader
+  args:
+    num_workers: 16
+    batch_size: 16
+    shuffle: false
+    dataset_name: 'YouCook2'
+
+    dataset_kwargs:
+      data_path: './data/youcook/resnet/youcook_val.pkl'
+      max_words: 20
+      n_video_tokens: 12
+      video_sampling_strategy: 'max_pool'
+      num_audio_STFT_frames: 4608
+      word2vec_path: './data/GoogleNews-vectors-negative300.bin'
