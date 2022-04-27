@@ -96,8 +96,8 @@ class Trainer(BaseTrainer):
 
             if self.writer is not None:
                 for loss_name, loss_value in loss_info.items():
-                    self.writer.log_scalar(f'loss_train_{loss_name}_0', loss_value, step=self.step)
-                self.writer.log_scalar(f'loss_train_0', loss.detach().item(), step=self.step) # TODO: remove 0
+                    self.writer.log_scalar(f'loss_train_{loss_name}', loss_value, step=self.step)
+                self.writer.log_scalar(f'loss_train', loss.detach().item(), step=self.step)
 
             total_loss += loss.detach().item()
             total_iter += 1

@@ -29,16 +29,16 @@ Repository contains:
    
 3. If needed, create `pretrained_models` folder and download model weights [here](https://drive.google.com/drive/folders/1Yhq91lQa_2cJFbtAHWfA0JYsXdWUFz9I):
    * [Everything-At_Once (ResNet-152,ResNeXt-101)](https://drive.google.com/file/d/13qDxS1Dr4tfswhK7FBmP2DDQ8wd5_nYN/view?usp=sharing)
-   * [Everything-At_Once (ResNet-152,ResNeXt-101), fine-tuned on YouCook2](https://drive.google.com/drive/folders/1Yhq91lQa_2cJFbtAHWfA0JYsXdWUFz9I)
-   * [Everything-At_Once (ResNet-152,ResNeXt-101), fine-tuned on MSR-VTT](https://drive.google.com/drive/folders/1Yhq91lQa_2cJFbtAHWfA0JYsXdWUFz9I)
-   * [Everything-At_Once (S3D)](https://drive.google.com/drive/folders/1Yhq91lQa_2cJFbtAHWfA0JYsXdWUFz9I)
-   * [Everything-At_Once (CLIP)](https://drive.google.com/drive/folders/1Yhq91lQa_2cJFbtAHWfA0JYsXdWUFz9I)
-   * [Everything-At_Once (ResNet-152,ResNeXt-101), text-video only](https://drive.google.com/drive/folders/1Yhq91lQa_2cJFbtAHWfA0JYsXdWUFz9I)
+   * [Everything-At_Once (ResNet-152,ResNeXt-101), fine-tuned on YouCook2](https://drive.google.com/file/d/1POGKANJW2A1IFNi13DTnIvx5HMADw7gq/view?usp=sharing)
+   * [Everything-At_Once (ResNet-152,ResNeXt-101), fine-tuned on MSR-VTT](https://drive.google.com/file/d/1JUNOWpuYn2HXEUfq0D6T6EhfJ1EMNXhY/view?usp=sharing)
+   * [Everything-At_Once (S3D)](https://drive.google.com/file/d/1DRbbxm-tQaLBd6RibEBDniqX9XYpSohm/view?usp=sharing)
+   * [Everything-At_Once (CLIP)](https://drive.google.com/file/d/18K6bYkb6Ky7KMTabu4ScuM_GncRRdjay/view?usp=sharing)
+   * [Everything-At_Once (ResNet-152,ResNeXt-101), text-video only](https://drive.google.com/file/d/1oeyhBSPrsb7kiwRrwwaHNpwweO9tKkEn/view?usp=sharingI)
    
    Extract a tar: 
    ```
    cd pretrained_models
-   tar -xvf everything_at_once_tv.tar
+   tar -xvf everything_at_once_tva.tar
    ```     
 
 ## Evaluation 
@@ -127,7 +127,8 @@ If you use this code in your research, please cite:
 
 ## Contact
 
-If you have any problems with the code or have a question, please open an issue. I'll try to answer as soon as possible.
+If you have any problems with the code or have a question, please open an issue or send an email to shvetsova at em.uni-frankfurt.de. 
+I'll try to answer as soon as possible.
 
 ## Acknowledgments and Licenses
 
