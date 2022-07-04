@@ -1,8 +1,9 @@
 # Everything at Once – Multi-modal Fusion Transformer for Video Retrieval
 
-Shvetsova, N., Chen, B., Rouditchenko, A., Thomas, S., Kingsbury, B., Feris, R., Harwath, D., Glass, J. and Kuehne, H., 2021. 
-Everything at Once – Multi-modal Fusion Transformer for Video Retrieval.
-[arXiv preprint arXiv:2112.04446.](https://arxiv.org/pdf/2112.04446.pdf)
+[Shvetsova, N., Chen, B., Rouditchenko, A., Thomas, S., Kingsbury, B., Feris, R., Harwath, D., Glass, J. and Kuehne, H.
+Everything at Once – Multi-modal Fusion Transformer for Video Retrieval. In CVPR, 2022. ](https://openaccess.thecvf.com/content/CVPR2022/papers/Shvetsova_Everything_at_Once_-_Multi-Modal_Fusion_Transformer_for_Video_Retrieval_CVPR_2022_paper.pdf)
+
+[arXiv preprint arXiv:2112.04446](https://arxiv.org/pdf/2112.04446.pdf)
 
 ![alt text](arch.jpg)
 
@@ -90,8 +91,8 @@ for fine-tuning with CLIP features.
    Features extraction (ResNet-152,ResNeXt-101) and audio spectrogram extraction were carefully described in [https://github.com/roudimit/AVLnet/blob/main/training.md](https://github.com/roudimit/AVLnet/blob/main/training.md).
    We will release the code for S3D and CLIP feature extraction. 
 
-2. Review `configs/pretraining/everything_at_once_tva.yaml` and make sure `csv`, `features_path`, `features_path_audio`, and `caption_path` point on the correct paths.
-
+2. Review `configs/pretraining/everything_at_once_tva.yaml` and make sure `csv`, `features_path`, `features_path_audio`, and `caption_path` point on the correct paths. 
+   CSV file should contain one column named 'path' with a list of videos. An example of the CSV file that we used in the training can be found [here (HowTo100M_1166_videopaths.txt)](https://drive.google.com/file/d/1bSzxe95LRfPRb5YMJlYlkvgPmNFBlo5b/view?usp=sharing).
 3. Train `python train.py  --config configs/pretraining/everything_at_once_tva.yaml`
 
 Add `--neptune` key if you want to log experiments using neptune.ai (See Experiment Logging)
@@ -117,11 +118,12 @@ You may also take a look at `everything_at_once_tva.yaml`, where some comments a
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{shvetsova2021everything,
-  title={Everything at Once--Multi-modal Fusion Transformer for Video Retrieval},
-  author={Shvetsova, Nina and Chen, Brian and Rouditchenko, Andrew and Thomas, Samuel and Kingsbury, Brian and Feris, Rogerio and Harwath, David and Glass, James and Kuehne, Hilde},
-  journal={arXiv preprint arXiv:2112.04446},
-  year={2021}
+@inproceedings{shvetsova2022everything,
+  title={Everything at Once-Multi-Modal Fusion Transformer for Video Retrieval},
+  author={Shvetsova, Nina and Chen, Brian and Rouditchenko, Andrew and Thomas, Samuel and Kingsbury, Brian and Feris, Rogerio S and Harwath, David and Glass, James and Kuehne, Hilde},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={20020--20029},
+  year={2022}
 }
 ```
 
